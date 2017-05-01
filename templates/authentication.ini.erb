@@ -5,7 +5,7 @@ hostname  = ldaps://ldap-labs.eqiad.wikimedia.org ldaps://ldap-labs.codfw.wikime
 port      = 389
 root_dn   = "ou=people,dc=wikimedia,dc=org"
 bind_dn   = "cn,ou=people,dc=wikimedia,dc=org"
-filter =    (&(objectClass=person)(cn=${username}))
+filter =    "(&(objectClass=person)(cn=${username}))"
 
 <% else %>
 
