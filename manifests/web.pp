@@ -10,7 +10,7 @@ class icinga2::web {
         dist       => 'icinga-jessie',
         components => 'main',
         source     => false,
-        keyfile    => 'puppet:///modules/icinga2/icinga2.gpg',
+        keyfile    => 'puppet:///modules/icinga2/icingaweb2.gpg',
     }
 
     package { 'icingaweb2':
