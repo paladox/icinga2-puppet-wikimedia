@@ -5,6 +5,14 @@
 class icinga2::web {
     include ::icinga2
 
+    apt::repository { 'icingaweb2':
+        uri        => 'http://packages.icinga.com/debian',
+        dist       => 'icinga-jessie',
+        components => 'main',
+        source     => false,
+        keyfile    => 'puppet:///modules/icinga2/icinga2.pgp',
+    }
+
     package { 'icingaweb2':
         ensure => present,
     }
