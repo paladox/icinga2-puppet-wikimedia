@@ -1,1 +1,2 @@
-# icinga2-puppet-wikimedia
+# Icinga2 repo for wikimedia labs
+
