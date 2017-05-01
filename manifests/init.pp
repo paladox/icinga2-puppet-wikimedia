@@ -135,8 +135,8 @@ class icinga2(
     base::service_unit { 'icinga2':
         ensure         => 'present',
         systemd        => true,
-        upstart        => true,
-        sysvinit       => false,
+        upstart        => false,
+        sysvinit       => true,
         require   => [
             Mount['/var/icinga2-tmpfs'],
         ],
