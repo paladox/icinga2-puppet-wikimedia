@@ -1,11 +1,46 @@
-[adusers]
-type      = ldap
-hostname  = ldaps://ldap-labs.eqiad.wikimedia.org ldaps://ldap-labs.codfw.wikimedia.org
-port      = 389
-root_dn   = "ou=people,dc=wikimedia,dc=org"
-bind_dn   = "cn,ou=people,dc=wikimedia,dc=org"
-filter =    "(&(objectClass=person)(cn=${username}))"
+[icingaweb_db]
+type = "db"
+db = "mysql"
+host = <% @icingaweb_db_host %>
+port = ""
+dbname = <% @icingaweb_db_name %>
+username = <% @icingaweb_user_name %>
+password = <% @icingaweb_password %>
+charset = ""
+persistent = "0"
+use_ssl = "0"
 
-[icingaweb2]
-backend = "db"
-resource = "icingaweb_db"
+[icinga_ido]
+type = "db"
+db = "mysql"
+host = <% @icinga_ido_db_host %>
+port = ""
+dbname = <% @icinga_ido_db_name %>
+username = <% @icinga_ido_user_name %>
+password = <% @icinga_ido_password %>
+charset = ""
+persistent = "0"
+use_ssl = "0"
+
+[director]
+type = "db"
+db = "mysql"
+host = <% @director_db_host %>
+dbname = <% @director_db_name %>
+username = <% @director_user_name %>
+password = <% @director_password %>
+charset = "utf8"
+
+[ad_user]
+type = "ldap"
+hostname = "ldap-labs.eqiad.wikimedia.org ldaps://ldap-labs.codfw.wikimedia.org"
+port = "636"
+encryption = "ldaps"
+root_dn = "ou=people,dc=wikimedia,dc=org"
+
+[ad_group]
+type = "ldap"
+hostname = "ldap-labs.eqiad.wikimedia.org ldaps://ldap-labs.codfw.wikimedia.org"
+port = "636"
+encryption = "ldaps"
+root_dn = "ou=groups,dc=wikimedia,dc=org"
