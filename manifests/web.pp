@@ -5,10 +5,14 @@
 class icinga2::web {
     include ::icinga2
 
-    # Apparently required for the web interface
+    package { 'icingaweb2':
+        ensure => present,
+    }
+
     package { 'icinga2-doc':
         ensure => present,
     }
+
     include ::apache
     include ::apache::mod::php5
     include ::apache::mod::ssl
@@ -27,6 +31,13 @@ class icinga2::web {
     require_package('php5')
     require_package('php5-dev')
     require_package('php5-gd')
+
+    file { '/etc/icingaweb2':
+        ensure => 'directory',
+        owner  => 'www-data',
+        group  => 'icingaweb2',
+        mode   => '2755',
+    }
 
     file { '/etc/icingaweb2/authentication.ini':
         ensure => present,
