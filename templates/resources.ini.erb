@@ -1,0 +1,11 @@
+[adusers]
+type      = ldap
+hostname  = ldaps://ldap-labs.eqiad.wikimedia.org ldaps://ldap-labs.codfw.wikimedia.org
+port      = 389
+root_dn   = "ou=people,dc=wikimedia,dc=org"
+bind_dn   = "cn,ou=people,dc=wikimedia,dc=org"
+filter =    "(&(objectClass=person)(cn=${username}))"
+
+[icingaweb2]
+backend = "db"
+resource = "icingaweb_db"
