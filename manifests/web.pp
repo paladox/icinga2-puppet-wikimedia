@@ -28,6 +28,20 @@ class icinga2::web {
     require_package('php5-dev')
     require_package('php5-gd')
 
+    file { '/etc/icingaweb2/authentication.ini':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/authentication.ini',
+        owner  => 'www-data',
+        group  => 'icingaweb2',
+    }
+
+    file { '/etc/icingaweb2/resources.ini.ini':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/resources.ini.ini',
+        owner  => 'www-data',
+        group  => 'icingaweb2',
+    }
+  
     include ::passwords::ldap::wmf_cluster
     $proxypass = $passwords::ldap::wmf_cluster::proxypass
 
