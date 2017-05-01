@@ -149,7 +149,7 @@ class icinga2(
     }
 
     # FIXME: This should not require explicit setup
-    #service { 'icinga2':
+    # service { 'icinga2':
     #    ensure    => running,
     #    hasstatus => false,
     #    restart   => '/etc/init.d/icinga reload',
