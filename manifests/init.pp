@@ -39,33 +39,6 @@ class icinga2(
         ensure => 'present',
     }
 
-    file { '/etc/icinga/cgi.cfg':
-        source  => 'puppet:///modules/icinga/cgi.cfg',
-        owner   => 'icinga',
-        group   => 'icinga',
-        mode    => '0644',
-        require => Package['icinga'],
-        notify  => Service['icinga'],
-    }
-
-    file { '/etc/icinga2/icinga2.conf':
-        content => template('icinga/icinga.cfg.erb'),
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        require => Package['icinga2'],
-        notify  => Service['icinga2'],
-    }
-
-    file { '/etc/icinga2/nsca_frack.cfg':
-        content => secret('nagios/nsca_frack.cfg'),
-        owner   => 'icinga2',
-        group   => 'icinga2',
-        mode    => '0644',
-        require => Package['icinga2'],
-        notify  => Service['icinga2'],
-    }
-
     class { '::nagios_common::contactgroups':
         source  => 'puppet:///modules/nagios_common/contactgroups.cfg',
         require => Package['icinga2'],
@@ -112,7 +85,7 @@ class icinga2(
         atboot  => true,
         fstype  => 'tmpfs',
         device  => 'none',
-        options => 'size=128m,uid=icinga,gid=icinga2,mode=755',
+        options => 'size=128m,uid=icinga2,gid=icinga2,mode=755',
         require => File['/var/icinga2-tmpfs'],
     }
     # Fix the ownerships of some files. This is ugly but will do for now
