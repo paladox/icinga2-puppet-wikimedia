@@ -111,7 +111,7 @@ class icinga2(
     file { '/var/log/icinga2':
         ensure => 'directory',
         owner  => 'nagios',
-        group  => 'nagios',
+        group  => 'www-data',
         mode   => '2755',
     }
 
