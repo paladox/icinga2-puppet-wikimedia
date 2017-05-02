@@ -39,6 +39,30 @@ class icinga2::web {
     require_package('php5')
     require_package('php5-dev')
     require_package('php5-gd')
+    
+    $icingaweb_db_host = hiera('icingaweb_db_host')
+
+    $icingaweb_db_name = hiera('icingaweb_db_name')
+
+    $icingaweb_user_name = hiera('icingaweb_user_name')
+
+    $icingaweb_password = hiera('icingaweb_password')
+
+    $icinga_ido_db_host = hiera('icinga_ido_db_host')
+
+    $icinga_ido_db_name = hiera('icinga_ido_db_name')
+
+    $icinga_ido_user_name = hiera('icinga_ido_user_name')
+
+    $icinga_ido_password = hiera('icinga_ido_password')
+
+    $director_db_host = hiera('director_db_host')
+
+    $director_db_name = hiera('director_db_name')
+
+    $director_user_name = hiera('director_user_name')
+
+    $director_password = hiera('director_password')
 
     file { '/etc/icingaweb2':
         ensure => 'directory',
