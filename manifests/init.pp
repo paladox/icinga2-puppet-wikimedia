@@ -69,9 +69,7 @@ class icinga2(
         group  => 'nagios',
     }
 
-    file { ['/var/run/icinga2/',
-            '/var/run/icinga2/cmd',
-        ]:
+    file { '/var/run/icinga2/':
         ensure => directory,
         owner  => 'nagios',
         group  => 'www-data',
