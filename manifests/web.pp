@@ -56,7 +56,7 @@ class icinga2::web {
 
     file { '/etc/icingaweb2/resources.ini.ini':
         ensure => present,
-        source => 'puppet:///modules/icinga2/resources.ini.ini',
+        source => 'puppet:///modules/icinga2/resources.ini',
         owner  => 'www-data',
         group  => 'icingaweb2',
     }
@@ -84,8 +84,8 @@ class icinga2::web {
         require    => Class['apache::mod::ssl'],
     }
 
-    apache::site { 'icinga2.wmflabs.org':
-        content => template('icinga/icinga2.wmflabs.org.erb'),
+    apache::site { 'icinga.wmflabs.org':
+        content => template('icinga/icinga.wmflabs.org.erb'),
     }
 
     # remove icinga2 default config
