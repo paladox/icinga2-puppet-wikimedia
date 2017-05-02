@@ -23,12 +23,6 @@ class icinga2::plugins {
         group  => 'root',
         mode   => '0755',
     }
-    file { '/var/run/icinga2/cmd':
-        ensure => directory,
-        owner  => 'nagios',
-        group  => 'www-data',
-        mode   => '0775',
-    }
     file { '/etc/nagios-plugins':
         ensure => directory,
         owner  => 'root',
