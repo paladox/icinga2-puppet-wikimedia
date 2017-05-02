@@ -102,7 +102,7 @@ class icinga2::web {
     $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
 
     letsencrypt::cert::integrated { 'icinga2':
-        subjects   => hiera hiera('icinga2_apache_host', 'icinga2.wmflabs.org'),
+        subjects   => hiera('icinga2_apache_host', 'icinga.wmflabs.org'),
         puppet_svc => 'apache2',
         system_svc => 'apache2',
         require    => Class['apache::mod::ssl'],
