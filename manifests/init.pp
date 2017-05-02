@@ -39,31 +39,19 @@ class icinga2(
         ensure => 'present',
     }
 
-    class { '::nagios_common::contactgroups':
-        source  => 'puppet:///modules/nagios_common/contactgroups.cfg',
-        require => Package['icinga2'],
-        notify  => Service['icinga2'],
-    }
-
-    class { '::nagios_common::contacts':
-        content => secret('nagios/contacts.cfg'),
-        require => Package['icinga2'],
-        notify  => Service['icinga2'],
-    }
-
-    class { [
-      '::nagios_common::user_macros',
-      '::nagios_common::timeperiods',
-      '::nagios_common::notification_commands',
-    ] :
-        require => Package['icinga2'],
-        notify  => Service['icinga2'],
-    }
-
-    # FIXME: This should be in the package?
-    logrotate::conf { 'icinga2':
+    file { '/etc/icinga2/conf.d/hosts.conf':
         ensure => present,
-        source => 'puppet:///modules/icinga2/logrotate.conf',
+        source => 'puppet:///modules/icinga2/hosts.conf.erb',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::service_unit['icinga2'],
+    }
+
+    file { '/etc/icinga2/conf.d/services.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/services.conf.erb',
+        owner  => 'root',
+        group  => 'root',
     }
 
     # Setup all plugins!
@@ -72,22 +60,6 @@ class icinga2(
         notify  => Service['icinga2'],
     }
 
-    # Setup tmpfs for use by icinga
-    file { '/var/icinga2-tmpfs':
-        ensure => directory,
-        owner  => 'icinga2',
-        group  => 'icinga2',
-        mode   => '0755',
-    }
-
-    mount { '/var/icinga2-tmpfs':
-        ensure  => mounted,
-        atboot  => true,
-        fstype  => 'tmpfs',
-        device  => 'none',
-        options => 'size=128m,uid=icinga2,gid=icinga2,mode=755',
-        require => File['/var/icinga2-tmpfs'],
-    }
     # Fix the ownerships of some files. This is ugly but will do for now
     file { ['/var/cache/icinga2',
             '/var/lib/icinga2/',
@@ -110,14 +82,11 @@ class icinga2(
         systemd        => true,
         upstart        => false,
         sysvinit       => true,
-        require   => [
-            Mount['/var/icinga2-tmpfs'],
-        ],
         service_params => {
             ensure     => 'running',
             provider   => $::initsystem,
             hasrestart => true,
-            restart   => 'systemctl reload icinga2',
+            restart   => '/bin/systemctl reload icinga2',
         },
     }
 
@@ -131,14 +100,6 @@ class icinga2(
     #        File['/etc/init.d/icinga'],
     #    ],
     #}
-
-    # Script to purge resources for non-existent hosts
-    file { '/usr/local/sbin/purge-nagios-resources.py':
-        source => 'puppet:///modules/icinga2/purge-nagios-resources.py',
-        owner  => 'icinga2',
-        group  => 'icinga2',
-        mode   => '0755',
-    }
 
     # Command folders / files to let icinga web to execute commands
     # See Debian Bug 571801
@@ -156,22 +117,6 @@ class icinga2(
         mode   => '2755',
     }
 
-    # Check that the icinga config is sane
-    # This may not work for icinga2 yet.
-    monitoring::service { 'check_icinga2_config':
-        description    => 'Check correctness of the icinga2 configuration',
-        check_command  => 'check_icinga2_config',
-        check_interval => 10,
-    }
-
-    # script to schedule host downtimes
-    file { '/usr/local/bin/icinga-downtime':
-        ensure => present,
-        source => 'puppet:///modules/icinga/icinga-downtime.sh',
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0550',
-    }
     # Purge unmanaged nagios_host and nagios_services resources
     # This will only happen for non exported resources, that is resources that
     # are declared by the icinga host itself
