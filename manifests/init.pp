@@ -57,7 +57,7 @@ class icinga2(
     # Setup all plugins!
     class { '::icinga2::plugins':
         require => Package['icinga2'],
-        notify  => Service['icinga2'],
+        notify  => Base::Service_unit['icinga2'],
     }
 
     # Fix the ownerships of some files. This is ugly but will do for now
