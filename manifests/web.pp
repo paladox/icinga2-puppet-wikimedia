@@ -109,7 +109,7 @@ class icinga2::web {
     }
 
     apache::site { 'icinga.wmflabs.org':
-        content => template('icinga/icinga.wmflabs.org.erb'),
+        content => template('icinga2/icinga.wmflabs.org.erb'),
     }
 
     # remove icinga2 default config
