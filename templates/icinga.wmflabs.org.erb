@@ -2,20 +2,8 @@
 
 #NameVirtualHost *:443
 
-AddHandler cgi-script .cgi
-## BEGIN APACHE CONFIG SNIPPET - ICINGA.CONF
-#Alias /stylesheets /etc/icinga/stylesheets
-#ScriptAlias /cgi-bin/icinga /usr/lib/cgi-bin/icinga
-#ScriptAlias /icinga/cgi-bin /usr/lib/cgi-bin/icinga
-ScriptAlias /cgi-bin/icinga /usr/share/icinga/htdocs/cgi-bin/icinga
-ScriptAlias /icinga/cgi-bin /usr/share/icinga/htdocs/cgi-bin/icinga
-
-# Where the stylesheets (config files) reside
-Alias /icinga/stylesheets /usr/share/icinga/htdocs/stylesheets
-
 # here the HTML pages live
 Alias /icingaweb2 "/usr/share/icingaweb2/public"
-#/usr/share/icinga/htdocs
 
 <VirtualHost *:443>
     ServerName gerrit-icinga.wmflabs.org
