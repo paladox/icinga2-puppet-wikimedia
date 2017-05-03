@@ -73,14 +73,14 @@ class icinga2::web {
 
     file { '/etc/icingaweb2/authentication.ini':
         ensure => present,
-        source => 'puppet:///modules/icinga2/authentication.ini.erb',
+        source => template('icinga2/authentication.ini.erb'),
         owner  => 'www-data',
         group  => 'icingaweb2',
     }
 
     file { '/etc/icingaweb2/resources.ini':
         ensure => present,
-        source => 'puppet:///modules/icinga2/resources.ini.erb',
+        source => template('icinga2/resources.ini.erb'),
         owner  => 'www-data',
         group  => 'icingaweb2',
     }
