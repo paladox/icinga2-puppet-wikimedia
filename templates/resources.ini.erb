@@ -13,11 +13,11 @@ use_ssl = "0"
 [icinga_ido]
 type = "db"
 db = "mysql"
-host = <% @icinga_ido_db_host %>
+host = <%= @icinga_ido_db_host %>"
 port = ""
-dbname = <% @icinga_ido_db_name %>
-username = <% @icinga_ido_user_name %>
-password = <% @icinga_ido_password %>
+dbname = "<%= @icinga_ido_db_name %>"
+username = "<%= @icinga_ido_user_name %>"
+password = "<% @icinga_ido_password %>"
 charset = ""
 persistent = "0"
 use_ssl = "0"
@@ -25,10 +25,10 @@ use_ssl = "0"
 [director]
 type = "db"
 db = "mysql"
-host = <% @director_db_host %>
-dbname = <% @director_db_name %>
-username = <% @director_user_name %>
-password = <% @director_password %>
+host = "<%= @director_db_host %>"
+dbname = "<%= @director_db_name %>"
+username = "<%= @director_user_name %>"
+password = "<%= @director_password %>"
 charset = "utf8"
 
 [ad_user]
