@@ -88,20 +88,13 @@ class icinga2::web {
     include ::passwords::ldap::wmf_cluster
     $proxypass = $passwords::ldap::wmf_cluster::proxypass
 
-    file { '/usr/share/icinga/htdocs/images/logos/ubuntu.png':
-        source => 'puppet:///modules/icinga/ubuntu.png',
-        owner  => 'icinga2',
-        group  => 'icinga2',
-        mode   => '0644',
-    }
-
     # install the Icinga Apache site
     include ::apache::mod::rewrite
     include ::apache::mod::authnz_ldap
 
     $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
 
-    #letsencrypt::cert::integrated { 'icinga2':
+    # letsencrypt::cert::integrated { 'icinga2':
     #    subjects   => hiera('icinga2_apache_host', 'icinga.wmflabs.org'),
     #    puppet_svc => 'apache2',
     #    system_svc => 'apache2',
