@@ -21,7 +21,7 @@ class icinga2(
 
     group { 'icinga2':
         ensure => present,
-        name   => 'icinga',
+        name   => 'icinga2',
     }
 
     user { 'icinga2':
