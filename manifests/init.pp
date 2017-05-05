@@ -39,9 +39,33 @@ class icinga2(
         ensure => 'present',
     }
 
+    file { '/etc/icinga2/conf.d/commands.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/commands.conf',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
+    }
+
+    file { '/etc/icinga2/conf.d/groups.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/groups.conf',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
+    }
+
     file { '/etc/icinga2/conf.d/hosts.conf':
         ensure => present,
         source => 'puppet:///modules/icinga2/hosts.conf',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
+    }
+
+    file { '/etc/icinga2/conf.d/notifications.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/notifications.conf',
         owner  => 'root',
         group  => 'root',
         notify  => Base::Service_unit['icinga2'],
@@ -52,6 +76,30 @@ class icinga2(
         source => 'puppet:///modules/icinga2/services.conf',
         owner  => 'root',
         group  => 'root',
+    }
+
+    file { '/etc/icinga2/conf.d/templates.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/templates.conf',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
+    }
+
+    file { '/etc/icinga2/conf.d/timeperiods.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/timeperiods.conf',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
+    }
+
+    file { '/etc/icinga2/conf.d/users.conf':
+        ensure => present,
+        source => 'puppet:///modules/icinga2/users.conf',
+        owner  => 'root',
+        group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
     }
 
     # Setup all plugins!
