@@ -76,6 +76,7 @@ class icinga2(
         source => 'puppet:///modules/icinga2/services.conf',
         owner  => 'root',
         group  => 'root',
+        notify  => Base::Service_unit['icinga2'],
     }
 
     file { '/etc/icinga2/conf.d/templates.conf':
