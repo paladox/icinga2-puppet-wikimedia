@@ -4,117 +4,114 @@
 
 # here the HTML pages live
 
+<VirtualHost *:80>
+    ServerName gerrit-icinga.wmflabs.org
+    #ServerAdmin
+    DocumentRoot /usr/share/icingaweb2/public
+
+    <Directory "/usr/share/icingaweb2/public">
+        Options SymLinksIfOwnerMatch
+        AllowOverride None
+
+        <IfModule mod_authz_core.c>
+            # Apache 2.4
+            <RequireAll>
+                Require all granted
+            </RequireAll>
+        </IfModule>
+
+        <IfModule !mod_authz_core.c>
+            # Apache 2.2
+            Order allow,deny
+            Allow from all
+        </IfModule>
+
+        SetEnv ICINGAWEB_CONFIGDIR "/etc/icingaweb2"
+
+        EnableSendfile Off
+
+        <IfModule mod_rewrite.c>
+            RewriteEngine on
+            RewriteBase /
+            RewriteCond %{REQUEST_FILENAME} -s [OR]
+            RewriteCond %{REQUEST_FILENAME} -l [OR]
+            RewriteCond %{REQUEST_FILENAME} -d
+            RewriteRule ^.*$ - [NC,L]
+            RewriteRule ^.*$ index.php [NC,L]
+        </IfModule>
+
+        <IfModule !mod_rewrite.c>
+            DirectoryIndex error_norewrite.html
+            ErrorDocument 404 /error_norewrite.html
+        </IfModule>
+    </Directory>
+
+    RewriteEngine on
+    RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301,NE]
+
+    ErrorLog /var/log/apache2/icinga.log
+    LogLevel warn
+</VirtualHost>
+
 <VirtualHost *:443>
     ServerName gerrit-icinga.wmflabs.org
     #ServerAdmin noc@wikimedia.org
     # https://httpoxy.org/
-    #RequestHeader unset Proxy early
+    RequestHeader unset Proxy early
+
     SSLEngine On
     SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
     SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 
     DocumentRoot /usr/share/icingaweb2/public
 
-<Directory "/usr/share/icingaweb2/public">
-    Options SymLinksIfOwnerMatch
-    AllowOverride None
+    <Directory "/usr/share/icingaweb2/public">
+        Options SymLinksIfOwnerMatch
+        AllowOverride None
 
-    <IfModule mod_authz_core.c>
-        # Apache 2.4
-        <RequireAll>
-            Require all granted
-        </RequireAll>
-    </IfModule>
+        <IfModule mod_authz_core.c>
+            # Apache 2.4
+            <RequireAll>
+                Require all granted
+            </RequireAll>
+        </IfModule>
 
-    <IfModule !mod_authz_core.c>
-        # Apache 2.2
-        Order allow,deny
-        Allow from all
-    </IfModule>
+        <IfModule !mod_authz_core.c>
+            # Apache 2.2
+            Order allow,deny
+            Allow from all
+        </IfModule>
 
-    SetEnv ICINGAWEB_CONFIGDIR "/etc/icingaweb2"
+        SetEnv ICINGAWEB_CONFIGDIR "/etc/icingaweb2"
 
-    EnableSendfile Off
+        EnableSendfile Off
 
-    <IfModule mod_rewrite.c>
+        <IfModule mod_rewrite.c>
+            RewriteEngine on
+            RewriteBase /
+            RewriteCond %{REQUEST_FILENAME} -s [OR]
+            RewriteCond %{REQUEST_FILENAME} -l [OR]
+            RewriteCond %{REQUEST_FILENAME} -d
+            RewriteRule ^.*$ - [NC,L]
+            RewriteRule ^.*$ index.php [NC,L]
+        </IfModule>
+
+        <IfModule !mod_rewrite.c>
+            DirectoryIndex error_norewrite.html
+            ErrorDocument 404 /error_norewrite.html
+        </IfModule>
+
         RewriteEngine on
-        RewriteBase /
-        RewriteCond %{REQUEST_FILENAME} -s [OR]
-        RewriteCond %{REQUEST_FILENAME} -l [OR]
-        RewriteCond %{REQUEST_FILENAME} -d
-        RewriteRule ^.*$ - [NC,L]
-        RewriteRule ^.*$ index.php [NC,L]
-    </IfModule>
-
-    <IfModule !mod_rewrite.c>
-        DirectoryIndex error_norewrite.html
-        ErrorDocument 404 /error_norewrite.html
-    </IfModule>
-
-    RewriteEngine on
-    RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301,NE]
-</Directory>
+        RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301,NE]
+    </Directory>
 
     <IfModule !mod_alias.c>
         LoadModule alias_module modules/mod_alias.so
     </IfModule>
 
-    RedirectMatch ^/$ https://gerrit-icinga2.wmflabs.org/
     ErrorLog /var/log/apache2/icinga.log
     CustomLog /var/log/apache2/icinga-access.log combined
     #LogLevel warn
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerName gerrit-icinga.wmflabs.org
-    #ServerAdmin
-   DocumentRoot /usr/share/icingaweb2/public
-
- #   Include /etc/acme/challenge-apache.conf
-
-  #  RewriteEngine on
- #   RewriteCond %{SERVER_PORT} !^443$
-   # RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301]
-
-<Directory "/usr/share/icingaweb2/public">
-    Options SymLinksIfOwnerMatch
-    AllowOverride None
-
-    <IfModule mod_authz_core.c>
-        # Apache 2.4
-        <RequireAll>
-            Require all granted
-        </RequireAll>
-    </IfModule>
-
-    <IfModule !mod_authz_core.c>
-        # Apache 2.2
-        Order allow,deny
-        Allow from all
-    </IfModule>
-
-    SetEnv ICINGAWEB_CONFIGDIR "/etc/icingaweb2"
-
-    EnableSendfile Off
-
-    <IfModule mod_rewrite.c>
-        RewriteEngine on
-        RewriteBase /
-        RewriteCond %{REQUEST_FILENAME} -s [OR]
-        RewriteCond %{REQUEST_FILENAME} -l [OR]
-        RewriteCond %{REQUEST_FILENAME} -d
-        RewriteRule ^.*$ - [NC,L]
-        RewriteRule ^.*$ index.php [NC,L]
-    </IfModule>
-
-    <IfModule !mod_rewrite.c>
-        DirectoryIndex error_norewrite.html
-        ErrorDocument 404 /error_norewrite.html
-    </IfModule>
-</Directory>
-
-    ErrorLog /var/log/apache2/icinga.log
-    LogLevel warn
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
