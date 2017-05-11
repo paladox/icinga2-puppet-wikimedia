@@ -3,16 +3,15 @@
 #NameVirtualHost *:443
 
 # here the HTML pages live
-Alias /icingaweb2 "/usr/share/icingaweb2/public"
 
 <VirtualHost *:443>
     ServerName gerrit-icinga.wmflabs.org
     #ServerAdmin noc@wikimedia.org
     # https://httpoxy.org/
     #RequestHeader unset Proxy early
-        SSLEngine On
-               SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
-                SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+    SSLEngine On
+    SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
+    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 
     DocumentRoot /usr/share/icingaweb2/public
 
@@ -39,7 +38,7 @@ Alias /icingaweb2 "/usr/share/icingaweb2/public"
 
     <IfModule mod_rewrite.c>
         RewriteEngine on
-        RewriteBase /icingaweb2/
+        RewriteBase /
         RewriteCond %{REQUEST_FILENAME} -s [OR]
         RewriteCond %{REQUEST_FILENAME} -l [OR]
         RewriteCond %{REQUEST_FILENAME} -d
@@ -53,14 +52,14 @@ Alias /icingaweb2 "/usr/share/icingaweb2/public"
     </IfModule>
 
     RewriteEngine on
-    RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/icingaweb2/$1 [L,R=301,NE]
+    RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301,NE]
 </Directory>
 
     <IfModule !mod_alias.c>
         LoadModule alias_module modules/mod_alias.so
     </IfModule>
 
-    RedirectMatch ^/$ https://gerrit-icinga2.wmflabs.org/icingaweb2/
+    RedirectMatch ^/$ https://gerrit-icinga2.wmflabs.org/
     ErrorLog /var/log/apache2/icinga.log
     CustomLog /var/log/apache2/icinga-access.log combined
     #LogLevel warn
@@ -100,7 +99,7 @@ Alias /icingaweb2 "/usr/share/icingaweb2/public"
 
     <IfModule mod_rewrite.c>
         RewriteEngine on
-        RewriteBase /icingaweb2/
+        RewriteBase /
         RewriteCond %{REQUEST_FILENAME} -s [OR]
         RewriteCond %{REQUEST_FILENAME} -l [OR]
         RewriteCond %{REQUEST_FILENAME} -d
