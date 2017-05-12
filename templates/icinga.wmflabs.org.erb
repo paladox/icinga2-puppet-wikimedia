@@ -45,7 +45,10 @@
             ErrorDocument 404 /error_norewrite.html
         </IfModule>
     </Directory>
-
+    IncludeOptional /etc/acme/challenge-apache.conf
+    RewriteEngine on
+    RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
+    RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301,NE]
     ErrorLog /var/log/apache2/icinga.log
     LogLevel warn
 </VirtualHost>
