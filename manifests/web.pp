@@ -81,6 +81,8 @@ class icinga2::web(
     include ::apache::mod::rewrite
     include ::apache::mod::authnz_ldap
 
+    sslcert::certificate { 'gerrit-icinga.wmflabs.org': }
+
     $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
 
     # letsencrypt::cert::integrated { 'icinga2':
