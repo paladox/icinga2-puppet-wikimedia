@@ -60,9 +60,9 @@
     RequestHeader unset Proxy early
 
     SSLEngine on
-    SSLCertificateFile /etc/acme/cert/gerrit-icinga.crt
-    SSLCertificateChainFile /etc/acme/cert/gerrit-icinga.chain.crt
-    SSLCertificateKeyFile /etc/acme/key/gerrit-icinga.key
+    SSLCertificateFile /etc/acme/cert/gerrit_icinga.crt
+    SSLCertificateChainFile /etc/acme/cert/gerrit_icinga.chain.crt
+    SSLCertificateKeyFile /etc/acme/key/gerrit_icinga.key
     <%= @ssl_settings.join("\n    ") %>
  
     DocumentRoot /usr/share/icingaweb2/public
