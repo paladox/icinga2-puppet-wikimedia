@@ -92,6 +92,11 @@ class icinga2::web(
  
     $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
 
+            letsencrypt::cert::integrated { 'gerrit-icinga':
+                 subjects   => 'gerrit-icinga.wmflabs.org',
+                 puppet_svc => 'apache2',
+                 system_svc => 'apache2',
+             }
     # letsencrypt::cert::integrated { 'icinga2':
     #    subjects   => hiera('icinga2_apache_host', 'icinga.wmflabs.org'),
     #    puppet_svc => 'apache2',
