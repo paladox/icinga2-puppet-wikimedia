@@ -45,11 +45,9 @@
             ErrorDocument 404 /error_norewrite.html
         </IfModule>
     </Directory>
-
      RewriteEngine on
      RewriteCond %{SERVER_PORT} !^443$
      RewriteRule ^/(.*)$ https://gerrit-icinga.wmflabs.org/$1 [L,R=301,NE]
-   
     ErrorLog /var/log/apache2/icinga.log
     CustomLog /var/log/apache2/icinga-access.log combined
     # LogLevel warn
