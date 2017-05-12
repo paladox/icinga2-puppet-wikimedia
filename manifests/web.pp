@@ -80,9 +80,16 @@ class icinga2::web(
     # install the Icinga Apache site
     include ::apache::mod::rewrite
     include ::apache::mod::authnz_ldap
-
-    sslcert::certificate { 'gerrit-icinga.wmflabs.org': }
-
+     include ::apache::mod::rewrite
+ 
+     include ::apache::mod::proxy
+ 
+     include ::apache::mod::proxy_http
+ 
+     include ::apache::mod::ssl
+ 
+     include ::apache::mod::headers
+ 
     $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
 
     # letsencrypt::cert::integrated { 'icinga2':
