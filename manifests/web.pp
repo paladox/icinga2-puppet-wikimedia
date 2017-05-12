@@ -86,17 +86,16 @@ class icinga2::web(
  
      include ::apache::mod::proxy_http
  
-     include ::apache::mod::ssl
- 
      include ::apache::mod::headers
- 
-    $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
+
 
             letsencrypt::cert::integrated { 'gerrit-icinga':
                  subjects   => 'gerrit-icinga.wmflabs.org',
                  puppet_svc => 'apache2',
                  system_svc => 'apache2',
              }
+    
+        $ssl_settings = ssl_ciphersuite('apache', 'mid', true)
     # letsencrypt::cert::integrated { 'icinga2':
     #    subjects   => hiera('icinga2_apache_host', 'icinga.wmflabs.org'),
     #    puppet_svc => 'apache2',
@@ -104,14 +103,10 @@ class icinga2::web(
     #    require    => Class['apache::mod::ssl'],
     #}
 
-    apache::site { 'icinga.wmflabs.org':
+    apache::site { 'gerrit-icinga.wmflabs.org':
         content => template('icinga2/icinga.wmflabs.org.erb'),
     }
 
-    # remove icinga2 default config
-    file { '/etc/icinga/apache2.conf':
-        ensure => absent,
-    }
     file { '/etc/apache2/conf.d/icinga2.conf':
         ensure => absent,
     }
