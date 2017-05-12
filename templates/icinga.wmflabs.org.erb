@@ -47,7 +47,8 @@
     </Directory>
 
     ErrorLog /var/log/apache2/icinga.log
-    LogLevel warn
+    CustomLog /var/log/apache2/icinga-access.log combined
+    # LogLevel warn
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
