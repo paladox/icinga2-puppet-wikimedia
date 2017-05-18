@@ -73,7 +73,7 @@ class icinga2(
 
     file { '/etc/icinga2/conf.d/services.conf':
         ensure => present,
-        source => 'puppet:///modules/icinga2/services.conf',
+        content => template('icinga2/services.conf.erb'),
         owner  => 'root',
         group  => 'root',
         notify  => Base::Service_unit['icinga2'],
