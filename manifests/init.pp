@@ -41,7 +41,7 @@ class icinga2(
 
     file { '/etc/icinga2/conf.d/commands.conf':
         ensure => present,
-        source => 'puppet:///modules/icinga2/commands.conf',
+        content => template('icinga2/commands.conf.erb'),
         owner  => 'root',
         group  => 'root',
         notify  => Base::Service_unit['icinga2'],
