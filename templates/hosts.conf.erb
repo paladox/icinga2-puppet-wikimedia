@@ -167,3 +167,18 @@ object Host "jenkins-slave-01.git.eqiad.wmflabs" {
     groups = [ "icingaadmins" ]
   }
  }
+
+
+object Host "wikistats.wmflabs.org" {
+         import "generic-host"
+         address = "wikistats.wmflabs.org"
+         vars.os = "Linux OS"
+         vars.sla = "24x7"
+         vars.puppet_check = "disable"
+         vars.disk_check = "disable"
+         vars.load_check = "disable"
+  vars.notification["mail"] = {
+    /* The UserGroup `icingaadmins` is defined in `users.conf`. */
+    groups = [ "icingaadmins" ]
+  }
+ }
