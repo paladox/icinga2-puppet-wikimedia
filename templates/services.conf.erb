@@ -160,7 +160,12 @@ object Service "gerrit-test3 check gerrit" {
          check_command = "check_http"
          vars.host = "gerrit.git.wmflabs.org"
  }
- 
+  object Service "wikistats.wmflabs.org check http" {
+         import "generic-service"
+         host_name = "wikistats.wmflabs.org"
+         check_command = "check_http"
+         vars.host = "wikistats.wmflabs.org"
+ }
 object Service "gerrit-jenkins.wmflabs.org check http" {
          import "generic-service"
          host_name = "gerrit-jenkins.wmflabs.org"
