@@ -85,14 +85,12 @@ object CheckCommand "check_http_2" {
 	arguments = {
 		"-H" = "$http_vhost$"
 		"-I" = {
-      set_if = "$http_address$"
-    }
-		"-u" = {
-      set_if = "$http_uri$"
-    }
+			set_if = "$http_address$"
+		}
+		"-u" = "$http_uri$"
 		"-p" = {
 			set_if = "$http_port$"
-    }
+		}
 		"-S" = {
 			set_if = "$http_ssl$"
 		}
