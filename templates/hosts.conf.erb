@@ -86,6 +86,7 @@ object Host "phab-01.wmflabs.org" {
      vars.puppet_check = "disable"
      vars.disk_check = "disable"
      vars.load_check = "disable"
+     host.vars.website_name = "phab-01.wmflabs.org"
 
      vars.notification["mail"] = {
        /* The UserGroup `icingaadmins` is defined in `users.conf`. */
