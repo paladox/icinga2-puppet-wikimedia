@@ -150,13 +150,6 @@ apply Service "check users" {
          vars.address = "labs-ns0.wikimedia.org"
  }
 
- object Service "phab-01 check http" {
-         import "generic-service"
-         host_name = "phab-01.wmflabs.org"
-         check_command = "check_http"
-         vars.host = "phab-01.wmflabs.org"
- }
-
 object Service "gerrit-test3 check gerrit" {
          import "generic-service"
          host_name = "gerrit-test3.git.eqiad.wmflabs"
@@ -164,25 +157,6 @@ object Service "gerrit-test3 check gerrit" {
          vars.check = "check_gerrit"
          vars.host = "gerrit-test3.git.eqiad.wmflabs"
 }
-
- object Service "gerrit.git.wmflabs.org check http" {
-         import "generic-service"
-         host_name = "gerrit.git.wmflabs.org"
-         check_command = "check_http"
-         vars.host = "gerrit.git.wmflabs.org"
- }
-  object Service "wikistats.wmflabs.org check http" {
-         import "generic-service"
-         host_name = "wikistats.wmflabs.org"
-         check_command = "check_http"
-         vars.host = "wikistats.wmflabs.org"
- }
-object Service "gerrit-jenkins.wmflabs.org check http" {
-         import "generic-service"
-         host_name = "gerrit-jenkins.wmflabs.org"
-         check_command = "check_http"
-         vars.host = "gerrit-jenkins.wmflabs.org"
- }
 
  object Service "phabricator.phabricator.eqiad.wmflabs check phd" {
          import "generic-service"
@@ -204,7 +178,6 @@ apply Service "apt_get" {
   assign where host.vars.external_host
 }
 
-
 apply Service "apt_get_distupgrade" {
   import "generic-service"
   check_command = "nrpe-check-1arg"
@@ -216,10 +189,10 @@ apply Service "apt_get_distupgrade" {
   assign where host.vars.external_host
 }
 
- object Service "gerrit-test.git.eqiad.wmflabs check jenkins" {
+object Service "gerrit-test.git.eqiad.wmflabs check jenkins" {
          import "generic-service"
          host_name = "gerrit-test.git.eqiad.wmflabs"
        check_command = "nrpe-check-1arg"
          vars.check = "check_jenkins"
          vars.host = "gerrit-test.git.eqiad.wmflabs"
- }
+}
