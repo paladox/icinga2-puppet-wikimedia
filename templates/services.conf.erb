@@ -80,6 +80,14 @@ apply Service "check disk" {
          assign where host.vars.disk_check != "disable"
  }
 
+apply Service "check http" {
+         import "generic-service"
+         host_name = host.vars.website_name
+         check_command = "check_http"
+         vars.host = host.vars.website_name
+         assign where host.vars.website_name
+ }
+
 apply Service "icinga" {
   import "generic-service"
 
