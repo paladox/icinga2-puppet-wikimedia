@@ -95,7 +95,7 @@ object CheckCommand "check_http_2" {
 			set_if = "$http_ssl$"
 		}
 		"-C" = {
-			set_if = "$http_certificate$"
+			value = "$http_certificate$"
 			description = "Minimum number of days a certificate has to be valid. This parameter explicitely sets the port to 443 and ignores the URL if passed."
 		}
 		"-f" = {
