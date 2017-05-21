@@ -82,11 +82,11 @@ apply Service "check disk" {
 
 apply Service "check http" {
          import "generic-service"
-         host_name = host.vars.website_name
-         check_command = "check_http"
+         check_command = "nrpe-check-1arg"
          vars.host = host.vars.website_name
+         vars.check = "check_http"
          assign where host.vars.website_name
- }
+}
 
 apply Service "icinga" {
   import "generic-service"
