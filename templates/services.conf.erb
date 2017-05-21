@@ -85,7 +85,7 @@ apply Service "check http" {
          check_command = "check_http_2"
          vars.http_vhost = host.vars.website_name
          vars.http_ssl = true
-         vars.http_url = host.vars.website_url
+         vars.http_uri = host.vars.website_url
         // vars.check = "check_http"
          assign where host.vars.website_name
          assign where host.vars.website_url
