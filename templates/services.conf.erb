@@ -88,6 +88,7 @@ apply Service "check http" {
          vars.http_url = host.vars.website_url
         // vars.check = "check_http"
          assign where host.vars.website_name
+         assign where host.vars.website_url
 }
 
 apply Service "icinga" {
