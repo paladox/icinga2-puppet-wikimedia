@@ -82,9 +82,11 @@ apply Service "check disk" {
 
 apply Service "check http" {
          import "generic-service"
-         check_command = "nrpe-check-1arg"
-         vars.host = host.vars.website_name
-         vars.check = "check_http"
+         check_command = "check_http_2"
+         vars.http_vhost = host.vars.website_name
+         vars.http_ssl = true
+         vars.http_url = /
+        // vars.check = "check_http"
          assign where host.vars.website_name
 }
 
