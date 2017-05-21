@@ -87,6 +87,7 @@ object Host "phab-01.wmflabs.org" {
      vars.disk_check = "disable"
      vars.load_check = "disable"
      vars.website_name = "phab-01.wmflabs.org"
+     vars.website_url = "/"
 
      vars.notification["mail"] = {
        /* The UserGroup `icingaadmins` is defined in `users.conf`. */
@@ -133,7 +134,8 @@ object Host "gerrit.git.wmflabs.org" {
      vars.puppet_check = "disable"
      vars.disk_check = "disable"
      vars.load_check = "disable"
-     vars.website_name = "gerrit.git.wmflabs.org/r"
+     vars.website_name = "gerrit.git.wmflabs.org"
+     vars.website_url = "/r/"
 
      vars.notification["mail"] = {
        /* The UserGroup `icingaadmins` is defined in `users.conf`. */
@@ -150,6 +152,7 @@ object Host "gerrit-jenkins.wmflabs.org" {
      vars.disk_check = "disable"
      vars.load_check = "disable"
      vars.website_name = "gerrit-jenkins.wmflabs.org"
+     vars.website_url = "/"
 
      vars.notification["mail"] = {
        /* The UserGroup `icingaadmins` is defined in `users.conf`. */
@@ -183,6 +186,7 @@ object Host "wikistats.wmflabs.org" {
      vars.disk_check = "disable"
      vars.load_check = "disable"
      vars.website_name = "wikistats.wmflabs.org"
+     vars.website_url = "/"
 
      vars.notification["mail"] = {
        /* The UserGroup `icingaadmins` is defined in `users.conf`. */
