@@ -76,6 +76,52 @@ object CheckCommand "check_http" {
     command = "$USER1$/check_http -H $host$"
 }
 
+object CheckCommand "check_http_2" {
+    import "migration-check-command"
+    import "plugin-check-command"
+
+	command = [ PluginDir + "/check_http" ]
+
+	arguments = {
+		"-H" = "$http_vhost$"
+		"-I" = {
+      set_if = "$http_address$"
+    }
+		"-u" = {
+      set_if = "$http_uri$"
+    }
+		"-p" = {
+			set_if = "$http_port$"
+    }
+		"-S" = {
+			set_if = "$http_ssl$"
+		}
+		"-C" = {
+			set_if = "$http_certificate$"
+			description = "Minimum number of days a certificate has to be valid. This parameter explicitely sets the port to 443 and ignores the URL if passed."
+		}
+		"-f" = {
+			set_if = "$http_onredirect$"
+			description = "How to handle redirect pages"
+		}
+		"-m" = {
+			set_if = "$http_pagesize$"
+			description = "Minim page size required:Maximum page size required"
+		}
+		"-t" = {
+			set_if = "$http_timeout$"
+			description = "Seconds before connection times out"
+		}
+		"-v" = {
+			set_if = "$http_verbose$"
+			description = "Show details for command-line debugging"
+		}
+	}
+
+	vars.http_ssl = false
+	vars.http_verbose = false
+}
+
 object CheckCommand "check_gerrit" {
     import "migration-check-command"
     import "plugin-check-command"
