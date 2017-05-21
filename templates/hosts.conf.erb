@@ -126,60 +126,66 @@ object Host "gerrit-test3.git.eqiad.wmflabs" {
 }
 
 object Host "gerrit.git.wmflabs.org" {
-         import "generic-host"
-         address = "gerrit.git.wmflabs.org"
-         vars.os = "Linux OS"
-         vars.sla = "24x7"
-         vars.puppet_check = "disable"
-         vars.disk_check = "disable"
-         vars.load_check = "disable"
-  vars.notification["mail"] = {
-    /* The UserGroup `icingaadmins` is defined in `users.conf`. */
-    groups = [ "icingaadmins" ]
-  }
+     import "generic-host"
+     address = "gerrit.git.wmflabs.org"
+     vars.os = "Linux OS"
+     vars.sla = "24x7"
+     vars.puppet_check = "disable"
+     vars.disk_check = "disable"
+     vars.load_check = "disable"
+     vars.website_name = "gerrit.git.wmflabs.org"
+
+     vars.notification["mail"] = {
+       /* The UserGroup `icingaadmins` is defined in `users.conf`. */
+       groups = [ "icingaadmins" ]
+     }
  }
 
 object Host "gerrit-jenkins.wmflabs.org" {
-         import "generic-host"
-         address = "gerrit-jenkins.wmflabs.org"
-         vars.os = "Linux OS"
-         vars.sla = "24x7"
-         vars.puppet_check = "disable"
-         vars.disk_check = "disable"
-         vars.load_check = "disable"
-  vars.notification["mail"] = {
-    /* The UserGroup `icingaadmins` is defined in `users.conf`. */
-    groups = [ "icingaadmins" ]
-  }
+     import "generic-host"
+     address = "gerrit-jenkins.wmflabs.org"
+     vars.os = "Linux OS"
+     vars.sla = "24x7"
+     vars.puppet_check = "disable"
+     vars.disk_check = "disable"
+     vars.load_check = "disable"
+     vars.website_name = "gerrit-jenkins.wmflabs.org"
+
+     vars.notification["mail"] = {
+       /* The UserGroup `icingaadmins` is defined in `users.conf`. */
+       groups = [ "icingaadmins" ]
+     }
 }
  
 object Host "jenkins-slave-01.git.eqiad.wmflabs" {
-         import "generic-host"
-         address = "jenkins-slave-01.git.eqiad.wmflabs"
-         vars.os = "Linux"
-         vars.sla = "24x7"
-         vars.external_host = true
-         vars.puppet_check = "enabled"
-         vars.check_user = true
+     import "generic-host"
+     address = "jenkins-slave-01.git.eqiad.wmflabs"
+     vars.os = "Linux"
+     vars.sla = "24x7"
+     vars.external_host = true
+     vars.puppet_check = "enabled"
+     vars.check_user = true
+     vars.host_name = "jenkins-slave-01.git.eqiad.wmflabs"
 
-         vars.host_name = "jenkins-slave-01.git.eqiad.wmflabs"
-  vars.notification["mail"] = {
-    /* The UserGroup `icingaadmins` is defined in `users.conf`. */
-    groups = [ "icingaadmins" ]
-  }
+     vars.notification["mail"] = {
+       /* The UserGroup `icingaadmins` is defined in `users.conf`. */
+       groups = [ "icingaadmins" ]
+     }
  }
 
 
 object Host "wikistats.wmflabs.org" {
-         import "generic-host"
-         address = "wikistats.wmflabs.org"
-         vars.os = "Linux OS"
-         vars.sla = "24x7"
-         vars.puppet_check = "disable"
-         vars.disk_check = "disable"
-         vars.load_check = "disable"
-  vars.notification["mail"] = {
-    /* The UserGroup `icingaadmins` is defined in `users.conf`. */
-    groups = [ "icingaadmins" ]
-  }
+     import "generic-host"
+     address = "wikistats.wmflabs.org"
+     vars.os = "Linux OS"
+     vars.sla = "24x7"
+     vars.puppet_check = "disable"
+     vars.disk_check = "disable"
+     vars.load_check = "disable"
+     vars.website_name = "wikistats.wmflabs.org"
+
+     vars.notification["mail"] = {
+       /* The UserGroup `icingaadmins` is defined in `users.conf`. */
+       groups = [ "icingaadmins" ]
+     }
  }
