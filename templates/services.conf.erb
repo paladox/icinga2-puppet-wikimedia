@@ -86,6 +86,7 @@ apply Service "check http" {
          vars.http_vhost = host.vars.website_name
          vars.http_ssl = true
          vars.http_uri = host.vars.website_url
+         vars.http_certificate = 10
         // vars.check = "check_http"
          assign where host.vars.website_name
          assign where host.vars.website_url
