@@ -64,8 +64,8 @@ apply Notification "ores-mail-icingaadmin" to Host {
         Recovery
     ]*/
 
-  assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs"
-  assign where host.vars.notification.mail
+  assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs" && host.vars.notification.mail
+  assign where host.vars.host == "ores-compute-01.ores.eqiad.wmflabs" && host.vars.notification.mail
 }
 
 apply Notification "ores-mail-icingaadmin" to Service {
@@ -83,8 +83,8 @@ apply Notification "ores-mail-icingaadmin" to Service {
         Recovery
     ]*/
 
-  assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs"
-  assign where host.vars.notification.mail
+  assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs" && host.vars.notification.mail
+  assign where host.vars.host == "ores-compute-01.ores.eqiad.wmflabs" && host.vars.notification.mail
 }
 
 /** end **/
