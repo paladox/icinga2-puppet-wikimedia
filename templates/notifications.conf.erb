@@ -66,6 +66,7 @@ apply Notification "ores-mail-icingaadmin" to Host {
 
   assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs"
   assign where host.vars.host == "ores-compute-01.ores.eqiad.wmflabs"
+  assign where host.vars.host == "ores-worker-05.ores.eqiad.wmflabs"
   assign where host.vars.notification.mail
 }
 
@@ -86,6 +87,7 @@ apply Notification "ores-mail-icingaadmin" to Service {
 
   assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs"
   assign where host.vars.host == "ores-compute-01.ores.eqiad.wmflabs"
+  assign where host.vars.host == "ores-worker-05.ores.eqiad.wmflabs"
   assign where host.vars.notification.mail
 }
 
