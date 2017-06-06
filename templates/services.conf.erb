@@ -77,7 +77,7 @@ apply Service "check disk" {
          vars.host = host.address
          vars.check = "check_disk"
          vars.disk_check = "enabled"
-         assign where host.address != "ores-web-05.ores.eqiad.wmflabs" && host.address != "ores-compute-01.ores.eqiad.wmflabs" && host.address != "ores-worker-05.ores.eqiad.wmflabs" && host.address != "ores-lb-02.ores.eqiad.wmflabs" host.vars.disk_check != "disable"
+         assign where host.address != "ores-web-05.ores.eqiad.wmflabs" && host.address != "ores-compute-01.ores.eqiad.wmflabs" && host.address != "ores-worker-05.ores.eqiad.wmflabs" && host.address != "ores-lb-02.ores.eqiad.wmflabs" && host.vars.disk_check != "disable"
  }
  
  apply Service "check disk_space" {
