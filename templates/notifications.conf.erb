@@ -45,3 +45,46 @@ apply Notification "mail-icingaadmin" to Service {
   assign where host.vars.host
   assign where host.vars.notification.mail
 }
+
+
+/** ores specific **/
+
+apply Notification "ores-mail-icingaadmin" to Host {
+  import "ores-mail-host-notification"
+
+  user_groups = ["icingaadmins"] /*host.vars.notification.mail.groups*/
+  //users = host.vars.notification.mail.users
+
+    /*types = [
+        Acknowledgement,
+        Custom,
+        FlappingEnd,
+        FlappingStart,
+        Problem,
+        Recovery
+    ]*/
+
+  assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs"
+  assign where host.vars.notification.mail
+}
+
+apply Notification "ores-mail-icingaadmin" to Service {
+  import "ores-mail-service-notification"
+
+  user_groups = ["icingaadmins"] /*host.vars.notification.mail.groups*/
+  //users = host.vars.notification.mail.users
+
+    /*types = [
+        Acknowledgement,
+        Custom,
+        FlappingEnd,
+        FlappingStart,
+        Problem,
+        Recovery
+    ]*/
+
+  assign where host.vars.host == "ores-web-05.ores.eqiad.wmflabs"
+  assign where host.vars.notification.mail
+}
+
+/** end **/
