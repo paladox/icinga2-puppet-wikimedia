@@ -116,7 +116,7 @@ apply Service "check load" {
   /* vars.backup_downtime = "02:00-03:00" */
 
          check_command = "nrpe-check-1arg"
-         vars.host = c
+         vars.host = host.address
          vars.check = "check_load"
          vars.load_check = "enabled"
          assign where host.vars.load_check != "disable"
