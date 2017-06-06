@@ -84,7 +84,7 @@ apply Service "check disk" {
          import "generic-service"
          check_command = "nrpe-check-1arg"
          vars.host = host.address
-         vars.check = "check_disk"
+         vars.check = "check_disk_space"
          vars.disk_check_ores = "enabled"
          assign where host.vars.disk_check_ores != "disable"
  }
