@@ -78,6 +78,7 @@ apply Service "check disk" {
          vars.check = "check_disk"
          vars.disk_check = "enabled"
          assign where host.vars.disk_check != "disable"
+         assign where host.vars.disk_check != "disable"
  }
  
  apply Service "check disk_space" {
@@ -97,8 +98,7 @@ apply Service "check http" {
          vars.http_certificate = 10
          vars.http_uri = host.vars.website_url
         // vars.check = "check_http"
-         assign where host.vars.website_name
-         assign where host.vars.website_url
+         assign where host.vars.website_name &&  host.address != "ores-web-05.ores.eqiad.wmflabs"
 }
 
 apply Service "icinga" {
@@ -116,7 +116,7 @@ apply Service "check load" {
   /* vars.backup_downtime = "02:00-03:00" */
 
          check_command = "nrpe-check-1arg"
-         vars.host = host.address
+         vars.host = c
          vars.check = "check_load"
          vars.load_check = "enabled"
          assign where host.vars.load_check != "disable"
